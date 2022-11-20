@@ -13,7 +13,8 @@ class Ticket extends Migration
 
         $this->forge->addField([
             'id'            => ['type' => 'int', 'constraint' => 12, 'unsigned' => true, 'auto_increment' => true],
-            'area'          => ['type' => 'int', 'constraint' => 12, 'unsigned' => true],
+            // 'area'          => ['type' => 'int', 'constraint' => 12, 'unsigned' => true],
+            'usuario'       => ['type' => 'int', 'constraint' => 11, 'auto_increment' => false, 'unsigned' => true],
             'category'      => ['type' => 'int', 'constraint' => 12, 'unsigned' => true],
             'priority'      => ['type' => 'varchar', 'constraint' => 5],
             'title'         => ['type' => 'varchar', 'constraint' => 150],
@@ -35,10 +36,11 @@ class Ticket extends Migration
         ]);
 
         $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('usuario', 'users', 'id');
         $this->forge->addForeignKey('category', 'categories', 'id');
         $this->forge->addForeignKey('priority', 'priorities', 'id');
         $this->forge->addForeignKey('status', 'status', 'id');
-        $this->forge->addForeignKey('area', 'areas', 'id');
+        // $this->forge->addForeignKey('area', 'areas', 'id');
         // $this->forge->addForeignKey('evidence', 'evidences', 'id');
         $this->forge->createTable('tickets', true);
 

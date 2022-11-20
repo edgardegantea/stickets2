@@ -12,6 +12,8 @@ class Users extends Migration
         $this->forge->addField([
             'id'            => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
             'name'          => ['type' => 'varchar', 'constraint' => 80],
+            'apaterno'      => ['type' => 'varchar', 'constraint' => 80],
+            'amaterno'      => ['type' => 'varchar', 'constraint' => 80],
             'email'         => ['type' => 'varchar', 'constraint' => 100],
             'phone_no'      => ['type' => 'varchar', 'constraint' => 20],
             'role'          => ['type' => 'varchar', 'constraint' => 20],

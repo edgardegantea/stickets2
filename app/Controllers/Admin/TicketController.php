@@ -44,6 +44,11 @@ class TicketController extends ResourceController
         $status = $builder->get();
         // $status = $builder->where('status.id', 'ASC')->get();
 
+        $builder2 = $db->table('areas')->select('areas.name');
+        $builder2->join('users', 'users.area = areas.id');
+        $builder2->join('tickets', 'users.id = tickets.usuario');
+        $usuario = $builder2->get();
+
         $data = [
             'title'     => 'Tickets de soporte',
             'total'     => $total,
@@ -51,9 +56,7 @@ class TicketController extends ResourceController
             // // 'tickets'   => $tickets->findAll(),
             // 'tickets'   => $tickets->orderBy('status', 'ASC')->findAll()
             'tickets'   => $tickets->orderBy('id', 'desc')->findAll(),
-
-            
-
+            'usuario'   => $usuario,
         ];
 
         return view('tickets/index', $data);
@@ -97,14 +100,16 @@ class TicketController extends ResourceController
         $categories = model('Categoria');
         $priorities = model('Prioridad');
         $status = model('Status');
-        $areas = model('Area');
+        $usuarios = model('UserModel');
+        // $areas = model('Area');
 
         $data = [
             'title'         => 'Nuevo ticket de soporte',
             'status'        => $status->findAll(),
             'priorities'    => $priorities->findAll(),
             'categories'    => $categories->findAll(),
-            'areas'         => $areas->findAll()
+            'usuarios'      => $usuarios,
+            // 'areas'         => $areas->findAll()
         ];
         return view('tickets/create', $data);
     }
@@ -117,14 +122,15 @@ class TicketController extends ResourceController
     public function create()
     {
         $inputs = $this->validate([
-            'area' => 'required',
-            'category' => 'required',
-            'priority' => 'required',
-            'title' => 'required|min_length[5]|max_length[150]',
-            'description' => 'required|min_length[5]',
-            'status'    => 'required',
-            'phone'     => 'required',
-            'email'     => 'required'
+            // 'area' => 'required',
+            'usuario'       => 'required',
+            'category'      => 'required',
+            'priority'      => 'required',
+            'title'         => 'required|min_length[5]|max_length[150]',
+            'description'   => 'required|min_length[5]',
+            'status'        => 'required',
+            'phone'         => 'required',
+            'email'         => 'required'
         ]);
 
         if (!$inputs) {
@@ -132,7 +138,8 @@ class TicketController extends ResourceController
         }
 
         $this->ticket->save([
-            'area'          => $this->request->getPost('area'),
+            // 'area'          => $this->request->getPost('area'),
+            'usuario'       => $this->request->getPost('usuario'),
             'category'      => $this->request->getPost('category'),
             'priority'      => $this->request->getPost('priority'),
             'title'         => $this->request->getPost('title'),
@@ -161,15 +168,17 @@ class TicketController extends ResourceController
         if ($ticket) {
             $categories = model('Categoria');
             $priorities = model('Prioridad');
-            $status = model('Status');
-            $areas = model('Area');
+            $status     = model('Status');
+            $usuarios   = model('UserModel');
+            // $areas = model('Area');
 
             $data = [
                 'title'         => 'Nuevo ticket de soporte',
                 'status'        => $status->findAll(),
                 'priorities'    => $priorities->findAll(),
                 'categories'    => $categories->findAll(),
-                'areas'         => $areas->findAll(),
+                'usuarios'      => $usuarios->findAll(),
+                // 'areas'         => $areas->findAll(),
                 'ticket'        => $ticket
             ];
 
@@ -188,7 +197,8 @@ class TicketController extends ResourceController
     public function update($id = null)
     {
         $inputs = $this->validate([
-            'area'          => 'required',
+            // 'area'          => 'required',
+            'usuario'       => 'rquired',
             'category'      => 'required',
             'priority'      => 'required',
             'title'         => 'required|min_length[5]|max_length[150]',
@@ -205,7 +215,8 @@ class TicketController extends ResourceController
         }
 
         $this->ticket->save([
-            'area'          => $this->request->getVar('area'),
+            // 'area'          => $this->request->getVar('area'),
+            'usuario'       => $this->request->getVar('usuario'),
             'category'      => $this->request->getVar('category'),
             'priority'      => $this->request->getVar('priority'),
             'title'         => $this->request->getVar('title'),

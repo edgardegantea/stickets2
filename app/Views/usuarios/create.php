@@ -17,15 +17,32 @@
 
                 <?php csrf_field(); ?>
 
+
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="exampleInputBorderWidth2">Nombre:</label>
                             <input type="text" class="form-control form-control-border border-width-2"
-                                   id="exampleInputBorderWidth2" name="name" placeholder="Nombre">
+                                   id="exampleInputBorderWidth2" name="name" placeholder="Ejemplo: Edgar">
                         </div>
                     </div>
 
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInputBorderWidth2">Apellido Paterno:</label>
+                            <input type="text" class="form-control form-control-border border-width-2"
+                                   id="exampleInputBorderWidth2" name="apaterno" placeholder="Ejemplo: Degante">
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInputBorderWidth2">Apellido Materno:</label>
+                            <input type="text" class="form-control form-control-border border-width-2"
+                                   id="exampleInputBorderWidth2" name="amaterno" placeholder="Ejemplo: Aguilar">
+                        </div>
+                    </div>
 
                     <div class="col-md-6">
                     <div class="form-group">

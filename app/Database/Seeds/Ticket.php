@@ -19,7 +19,8 @@ class Ticket extends Seeder
             $deleted_at = $faker->dateTimeBetween($updated_at);
 
             $tickets[] = [
-                'area'          => $faker->numberBetween(1, 4),
+                // 'area'          => $faker->numberBetween(1, 4),
+                'usuario'       => $faker->numberBetween(1,2),
                 'category'      => $faker->numberBetween(1, 6),
                 'priority'      => $faker->randomElement(['pr1', 'pr2', 'pr3', 'pr4', 'pr5']),
                 'title'         => $faker->sentence(),

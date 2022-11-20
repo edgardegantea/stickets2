@@ -9,6 +9,14 @@
                     <div class="card-title">
                         <?= session()->get('name') ?>
                     </div>
+
+
+                    <div class="card-body">
+                        <div class="card-text">
+                            Usted es un <?= session()->get('role'); ?> del sistema.
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>

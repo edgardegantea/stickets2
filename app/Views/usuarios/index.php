@@ -31,11 +31,21 @@
                             </td>
 
                             <td>
-                                <?= esc($usuario['area']); ?>
+                                
+                                <?php
+                                    if(mysql_num_rows($area) > 0 ){
+ while ($row = mysql_fetch_array ($area)) {
+echo "<br /> ID: " .$row['id']. "<br /> First Name: ".$row['name'];
+ }
+}
+                                ?>
+                                
                             </td>
 
                             <td>
                                 <?= esc($usuario['name']); ?>
+                                <?= esc($usuario['apaterno']); ?>
+                                <?= esc($usuario['amaterno']); ?>
                             </td>
 
                             <td>
@@ -70,6 +80,7 @@
                     <th>Correo electrónico</th>
                     <th>Teléfono</th>
                     <th>Rol</th>
+                    <th>Acciones</th>
                 </tr>
                 </tfoot>
             </table>

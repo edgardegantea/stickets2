@@ -30,9 +30,15 @@ class UsuariosController extends ResourceController
     {
         $users = model(UserModel::class);
 
+
+        $db = \Config\Database::connect();
+
+        $query = mysql_query("SELECT * FROM areas join users on areas.id = users.area");
+    
         $data = [
             'title' => 'Usuarios',
             'usuarios'  => $users->findAll(),
+            'area'  => $query
         ];
 
         return view('usuarios/index', $data);
@@ -77,6 +83,8 @@ class UsuariosController extends ResourceController
 
         $rules = [
             'name'      => 'required|min_length[3]|max_length[80]',
+            'apaterno'  => 'required|min_length[3]|max_length[80]',
+            'amaterno'  => 'required|min_length[3]|max_length[80]',
             'email'     => 'required|min_length[6]|max_length[80]|valid_email|is_unique[users.email]',
             'phone_no'  => 'required|min_length[6]|max_length[20]',
             'password'  => 'required|min_length[6]|max_length[200]',
@@ -89,6 +97,8 @@ class UsuariosController extends ResourceController
             $areas = model('Area');
             $data = [
                 'name'      => $this->request->getPost('name'),
+                'apaterno'  => $this->request->getPost('apaterno'),
+                'amaterno'  => $this->request->getPost('amaterno'),
                 'email'     => $this->request->getPost('email'),
                 'phone_no'  => $this->request->getPost('phone_no'),
                 'password'  => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
@@ -107,7 +117,6 @@ class UsuariosController extends ResourceController
             echo view('usuarios/create', $data);
             // return view('usuarios/create', $data);
         }
-
 
     }
 
@@ -159,6 +168,8 @@ class UsuariosController extends ResourceController
 
         $inputs = $this->validate([
             'name'      => 'required|min_length[3]|max_length[80]',
+            'apaterno'  => 'required|min_length[3]|max_length[80]',
+            'amaterno'  => 'required|min_length[3]|max_length[80]',
             'email'     => 'required|min_length[6]|max_length[80]|valid_email|is_unique[users.email]',
             'phone_no'  => 'required|min_length[6]|max_length[20]',
             'password'  => 'required|min_length[6]|max_length[200]',
@@ -174,6 +185,8 @@ class UsuariosController extends ResourceController
 
         $this->usuario->save([
             'name'      => $this->request->getPost('name'),
+            'apaterno'  => $this->request->getPost('apaterno'),
+            'amaterno'  => $this->request->getPost('amaterno'),
             'email'     => $this->request->getPost('email'),
             'phone_no'  => $this->request->getPost('phone_no'),
             'password'  => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),

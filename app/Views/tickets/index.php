@@ -16,7 +16,7 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Área</th>
+                    <th>Remitente</th>
                     <th>Estado</th>
                     <th>Asunto</th>
                     <th>Descripción</th>
@@ -53,6 +53,10 @@
 
                         <td>
                             
+
+                            <?= esc('usuario'); ?>
+
+                            <?php /*
                             <?php
                             if ($ticket['area'] == 1) {
                                 echo 'Subdirección Académica';
@@ -64,6 +68,7 @@
                                 echo 'División de Ingeniería Informática';
                             }
                             ?>
+                            */ ?> 
                         
                         </td>
 

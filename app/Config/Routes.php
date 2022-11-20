@@ -53,6 +53,9 @@ $routes->group("admin", ["filter" => "auth"], function ($routes) {
     // Ruta para testear creación de pdf
     $routes->get('tickets/pdf', 'admin\TicketController::generarPDF');
 
+    $routes->resource('tickets', ['controller' => 'Admin\TicketController']);
+
+    /*
     $routes->get('tickets', 'admin\TicketController::index');
     $routes->get('tickets/new', 'admin\TicketController::new');
     $routes->post('tickets', 'admin\TicketController::create');
@@ -60,6 +63,7 @@ $routes->group("admin", ["filter" => "auth"], function ($routes) {
     $routes->get('tickets/edit/(:num)', 'admin\TicketController::edit/$1');
     $routes->put('tickets/(:num)', 'admin\TicketController::update/$1');
     $routes->delete('tickets/(:num)', 'admin\TicketController::delete/$1');
+    */
 
 });
 
